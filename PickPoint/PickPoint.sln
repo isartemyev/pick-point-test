@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PickPoint.RestApi", "PickPo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PickPoint.UnitTests", "PickPoint.UnitTests\PickPoint.UnitTests.csproj", "{9B4D0B5D-9CCF-46D4-AEFD-5B42534156B2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution items", "{7CC63E9E-CAC1-41E0-8417-61C1353136A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
