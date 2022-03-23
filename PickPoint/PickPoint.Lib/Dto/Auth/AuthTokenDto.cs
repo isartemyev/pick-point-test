@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace PickPoint.Lib.Dto.Auth
 {
@@ -17,9 +16,9 @@ namespace PickPoint.Lib.Dto.Auth
             
         }
 
-        public AuthTokenDto(string userId, string accessToken)
+        public AuthTokenDto(string merchantId, string accessToken)
         {
-            MerchantId = userId ?? throw new ArgumentNullException(nameof(userId));
+            MerchantId = merchantId ?? throw new ArgumentNullException(nameof(merchantId));
             AccessToken = accessToken ?? throw new ArgumentNullException(nameof(accessToken));
         }
     }

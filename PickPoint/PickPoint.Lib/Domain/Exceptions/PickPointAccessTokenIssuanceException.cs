@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace PickPoint.Lib.Domain.Exceptions
+﻿namespace PickPoint.Lib.Domain.Exceptions
 {
     public class PickPointAccessTokenIssuanceException : Exception
     {
-        public PickPointAccessTokenIssuanceException() : base("Go away!")
+        public PickPointAccessTokenIssuanceException()
         {
         }
 

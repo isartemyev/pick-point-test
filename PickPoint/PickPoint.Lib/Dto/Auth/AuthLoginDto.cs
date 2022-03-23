@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace PickPoint.Lib.Dto.Auth
 {
     [DataContract]
-    public class AuthLogInDto
+    public class AuthLoginDto
     {
         [DataMember]
         [Required(ErrorMessage = "Login is required")]

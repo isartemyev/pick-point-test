@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PickPoint.Lib.Domain.Exceptions
+﻿namespace PickPoint.Lib.Domain.Exceptions
 {
     public class PickPointUnauthorizedAccessException : Exception
     {

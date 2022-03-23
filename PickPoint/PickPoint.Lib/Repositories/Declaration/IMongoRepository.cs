@@ -1,29 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using PickPoint.Lib.Domain.Common;
-
 namespace PickPoint.Lib.Repositories.Declaration;
 
-public interface IMongoRepository<TEntity> where TEntity : IEntity
+public interface IMongoRepository<T>
 {
-    Task<bool> CreateAsync(TEntity entity, CancellationToken ct = default);
+    Task CreateAsync(T entity, CancellationToken token = default);
 
-    Task<TEntity> ReadAsync(string id, CancellationToken ct = default);
+    Task<T> ReadAsync(string id, CancellationToken token = default);
 
-    Task<IQueryable<TEntity>> AllAsync(CancellationToken ct = default);
+    Task<IQueryable<T>> AllAsync(CancellationToken token = default);
 
-    Task<IQueryable<TEntity>> FilterAsync(Func<TEntity, bool> filter, CancellationToken ct = default);
+    Task<IQueryable<T>> FilterAsync(Func<T, bool> filter, CancellationToken token = default);
 
-    Task<bool> UpdateAsync(TEntity entity, CancellationToken ct = default);
+    Task UpdateAsync(T entity, CancellationToken token = default);
 
-    Task<bool> UpdateManyAsync(IEnumerable<TEntity> entities, CancellationToken ct = default);
+    Task UpsertAsync(T entity, CancellationToken token = default);
 
-    Task<bool> DeleteAsync(string id, CancellationToken ct = default);
-
-    Task<bool> DeleteAsync(TEntity entity, CancellationToken ct = default);
-
-    Task<bool> DeleteManyAsync(IEnumerable<TEntity> entities, CancellationToken ct = default);
+    Task<bool> DeleteAsync(string id, CancellationToken token = default);
 }

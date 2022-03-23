@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PickPoint.RestApi.Service;
+﻿namespace PickPoint.RestApi.Service;
 
 internal static class Program
 {

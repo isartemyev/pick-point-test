@@ -4,7 +4,7 @@ using PickPoint.Lib.Domain.Enums;
 namespace PickPoint.Lib.Dto.Merchant
 {
     [DataContract]
-    public class UserFilterDto
+    public class MerchantFilterDto
     {
         [DataMember]
         public string[] Ids { get; set; }

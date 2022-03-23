@@ -1,5 +1,3 @@
-using System;
-
 namespace PickPoint.Lib.Domain.Exceptions
 {
     public class PickPointAccessDeniedException : Exception
