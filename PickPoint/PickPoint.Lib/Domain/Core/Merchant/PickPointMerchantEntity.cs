@@ -21,4 +21,9 @@ public class PickPointMerchantEntity : PickPointEntity
 
     [DataMember]
     public string Email { get; private set; }
+
+    public void SetPasswordHash(string passwordHash)
+    {
+        PasswordHash = passwordHash;
+    }
 }

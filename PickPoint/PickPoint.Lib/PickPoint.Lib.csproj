@@ -7,8 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Facades\Implementations" />
-      <Folder Include="Mapper" />
+      <Folder Include="Filters\Extensions" />
+      <Folder Include="Filters\Implementations" />
+      <Folder Include="Mapping" />
     </ItemGroup>
 
     <ItemGroup>

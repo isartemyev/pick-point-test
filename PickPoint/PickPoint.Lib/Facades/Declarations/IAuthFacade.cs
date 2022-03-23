@@ -4,5 +4,5 @@ namespace PickPoint.Lib.Facades.Declarations;
 
 public interface IAuthFacade
 {
-    Task<AuthTokenDto> LogInAsync(AuthLoginDto payload, CancellationToken token = default);
+    Task<AuthTokenDto> LoginAsync(AuthLoginDto payload, CancellationToken token = default);
 }
