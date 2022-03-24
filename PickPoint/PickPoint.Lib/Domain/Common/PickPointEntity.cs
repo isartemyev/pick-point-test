@@ -1,5 +1,6 @@
 using System.Runtime.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
+using PickPoint.Lib.Extensions;
 
 namespace PickPoint.Lib.Domain.Common;
 
@@ -9,10 +10,10 @@ namespace PickPoint.Lib.Domain.Common;
 public abstract class PickPointEntity : IEntity
 {
     [DataMember]
-    public DateTime CreatedAt { get; protected set; } = DateTime.UtcNow;
+    public long CreatedAt { get; protected set; } = DateTime.UtcNow.ToUnixTimeMilliseconds();
 
     [DataMember]
-    public DateTime? UpdatedAt { get; protected set; }
+    public long? UpdatedAt { get; protected set; } = DateTime.UtcNow.ToUnixTimeMilliseconds();
 
     [DataMember]
     [BsonId]

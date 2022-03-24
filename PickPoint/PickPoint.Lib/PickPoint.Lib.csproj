@@ -7,8 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Filters\Extensions" />
-      <Folder Include="Filters\Implementations" />
       <Folder Include="Mapping" />
     </ItemGroup>
 
