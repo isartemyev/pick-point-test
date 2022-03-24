@@ -25,6 +25,11 @@ public class MachineFacade : IMachineFacade
     
     public async Task<MachineDto> CreateAsync(MachineCreateDto payload, PickPointMerchantEntity requester, CancellationToken token = default)
     {
+        if (requester.Role != EMerchantRole.Admin)
+        {
+            throw new PickPointAccessDeniedException();
+        }
+        
         var entity = new PickPointMachineEntity();
 
         _mapper.Map(payload, entity);
@@ -76,7 +81,7 @@ public class MachineFacade : IMachineFacade
 
         if (entity is null)
         {
-            return true;
+            throw new PickPointEntityNotFoundException();
         }
 
         return await _repository.DeleteAsync(id, token);
@@ -91,7 +96,7 @@ public class MachineFacade : IMachineFacade
             return Array.Empty<MachineDto>();
         }
 
-        var filtered = _filter.Apply(all, filter, requester)?.ToArray();
+        var filtered = _filter.Apply(all, filter, requester).ToArray();
 
         if (filtered is null || !filtered.Any())
         {

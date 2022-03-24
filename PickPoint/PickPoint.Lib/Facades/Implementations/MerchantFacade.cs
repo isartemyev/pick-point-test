@@ -26,6 +26,11 @@ public class MerchantFacade : IMerchantFacade
     public async Task<MerchantDto> CreateAsync(MerchantCreateDto payload, PickPointMerchantEntity requester,
         CancellationToken token = default)
     {
+        if (requester.Role != EMerchantRole.Admin)
+        {
+            throw new PickPointAccessDeniedException();
+        }
+        
         if (await CheckSameEmail(payload.Email, token) || await CheckSameEmail(payload.Login, token))
         {
             throw new PickPointValidationException("E-mail address is already in use.");
@@ -45,6 +50,11 @@ public class MerchantFacade : IMerchantFacade
     public async Task<MerchantDto> ReadAsync(string id, PickPointMerchantEntity requester,
         CancellationToken token = default)
     {
+        if (requester.Role != EMerchantRole.Admin)
+        {
+            throw new PickPointAccessDeniedException();
+        }
+        
         var entity = await _repository.ReadAsync(id, token);
 
         if (entity is null)
@@ -58,6 +68,11 @@ public class MerchantFacade : IMerchantFacade
     public async Task UpdateAsync(MerchantUpdateDto payload, PickPointMerchantEntity requester,
         CancellationToken token = default)
     {
+        if (requester.Role != EMerchantRole.Admin)
+        {
+            throw new PickPointAccessDeniedException();
+        }
+        
         var entity = await _repository.ReadAsync(payload.Id, token);
 
         if (entity is null)
@@ -90,6 +105,11 @@ public class MerchantFacade : IMerchantFacade
     public async Task<MerchantDto[]> ListAsync(MerchantFilterDto filter, PickPointMerchantEntity requester,
         CancellationToken token = default)
     {
+        if (requester.Role != EMerchantRole.Admin)
+        {
+            throw new PickPointAccessDeniedException();
+        }
+        
         var all = await _repository.AllAsync(token);
 
         if (all is null)

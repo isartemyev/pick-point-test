@@ -14,13 +14,15 @@ public class OrderFacade : IOrderFacade
 {
     private readonly IOrderFilter _filter;
     private readonly IMapper _mapper;
-    private readonly IOrderRepository _repository;
+    private readonly IOrderRepository _orderRepository;
+    private readonly IMachineRepository _machineRepository;
 
-    public OrderFacade(IOrderFilter filter, IMapper mapper, IOrderRepository repository)
+    public OrderFacade(IOrderFilter filter, IMapper mapper, IOrderRepository orderRepository, IMachineRepository machineRepository)
     {
         _filter = filter ?? throw new ArgumentNullException(nameof(filter));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-        _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+        _orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
+        _machineRepository = machineRepository ?? throw new ArgumentNullException(nameof(machineRepository));
     }
 
     public async Task<OrderDto> CreateAsync(OrderCreateDto payload, PickPointMerchantEntity requester,
@@ -30,7 +32,14 @@ public class OrderFacade : IOrderFacade
 
         _mapper.Map(payload, entity);
 
-        await _repository.CreateAsync(entity, token);
+        var machine = await _machineRepository.FindAsync(item => item.Number.Equals(entity.MachineNumber), token);
+
+        if (machine is null || !machine.Enabled)
+        {
+            throw new PickPointAccessDeniedException();
+        }
+
+        await _orderRepository.CreateAsync(entity, token);
 
         return _mapper.Map<OrderDto>(entity);
     }
@@ -38,7 +47,7 @@ public class OrderFacade : IOrderFacade
     public async Task<OrderDto> ReadAsync(string id, PickPointMerchantEntity requester,
         CancellationToken token = default)
     {
-        var entity = await _repository.ReadAsync(id, token);
+        var entity = await _orderRepository.ReadAsync(id, token);
 
         if (entity is null)
         {
@@ -51,21 +60,23 @@ public class OrderFacade : IOrderFacade
     public async Task UpdateAsync(OrderUpdateDto payload, PickPointMerchantEntity requester,
         CancellationToken token = default)
     {
-        if (requester.Role != EMerchantRole.Admin)
-        {
-            throw new PickPointAccessDeniedException();
-        }
-
-        var entity = await _repository.ReadAsync(payload.Id, token);
+        var entity = await _orderRepository.ReadAsync(payload.Id, token);
 
         if (entity is null)
         {
             throw new PickPointEntityNotFoundException();
         }
+        
+        var machine = await _machineRepository.FindAsync(item => item.Number.Equals(entity.MachineNumber), token);
+
+        if (machine is null || !machine.Enabled)
+        {
+            throw new PickPointAccessDeniedException();
+        }
 
         _mapper.Map(payload, entity);
 
-        await _repository.UpdateAsync(entity, token);
+        await _orderRepository.UpdateAsync(entity, token);
     }
 
     public async Task<bool> DeleteAsync(string id, PickPointMerchantEntity requester, CancellationToken token = default)
@@ -75,27 +86,27 @@ public class OrderFacade : IOrderFacade
             throw new PickPointAccessDeniedException();
         }
 
-        var entity = await _repository.ReadAsync(id, token);
+        var entity = await _orderRepository.ReadAsync(id, token);
 
         if (entity is null)
         {
-            return true;
+            throw new PickPointEntityNotFoundException();
         }
 
-        return await _repository.DeleteAsync(id, token);
+        return await _orderRepository.DeleteAsync(id, token);
     }
 
     public async Task<OrderDto[]> ListAsync(OrderFilterDto filter, PickPointMerchantEntity requester,
         CancellationToken token = default)
     {
-        var all = await _repository.AllAsync(token);
+        var all = await _orderRepository.AllAsync(token);
 
         if (all is null)
         {
             return Array.Empty<OrderDto>();
         }
 
-        var filtered = _filter.Apply(all, filter, requester)?.ToArray();
+        var filtered = _filter.Apply(all, filter, requester).ToArray();
 
         if (filtered is null || !filtered.Any())
         {
@@ -112,15 +123,13 @@ public class OrderFacade : IOrderFacade
             throw new PickPointAccessDeniedException();
         }
 
-        var entity = await _repository.ReadAsync(id, token);
+        var entity = await _orderRepository.ReadAsync(id, token);
 
         if (entity is null)
         {
             throw new PickPointEntityNotFoundException();
         }
 
-        entity.Cancel();
-
-        await _repository.UpdateAsync(entity, token);
+        await _orderRepository.CancelAsync(id, token);
     }
 }

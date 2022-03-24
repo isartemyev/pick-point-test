@@ -25,8 +25,10 @@ public class MachineFilter : IMachineFilter
             .FilterByIds(filter.Ids)
             .FilterByEnabled(filter.Enabled)
             .FilterByTime(filter.PeriodStart, filter.PeriodEnd)
+            .OrderBy(i => i.Number)
             .AsEnumerable()
-            .FilterByText(filter.Text);
+            .FilterByText(filter.Text)
+            ;
 
         return filtered.ToArray();
     }

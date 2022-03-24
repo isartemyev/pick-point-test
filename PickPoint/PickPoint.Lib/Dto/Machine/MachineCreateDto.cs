@@ -6,7 +6,7 @@ namespace PickPoint.Lib.Dto.Machine;
 [DataContract]
 public class MachineCreateDto
 {
-    [DataMember, Required]
+    [DataMember, Required, RegularExpression(@"([0-9]{4})[-]([0-9]{3})", ErrorMessage = "Invalid machine number")]
     public string Number { get; set; }
     
     [DataMember, Required]

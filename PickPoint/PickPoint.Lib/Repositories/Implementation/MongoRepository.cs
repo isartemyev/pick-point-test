@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using MongoDB.Driver;
 using PickPoint.Lib.Contexts;
 using PickPoint.Lib.Domain.Common;
@@ -22,6 +23,9 @@ namespace PickPoint.Lib.Repositories.Implementation;
             await Entities.Find(item => item.Id == id)
                 .FirstOrDefaultAsync(token);
 
+        public virtual async Task<T> FindAsync(Expression<Func<T, bool>> filter, CancellationToken token = default)=>
+            await Entities.Find(filter).FirstOrDefaultAsync(token);
+
         public virtual async Task<IQueryable<T>> AllAsync(CancellationToken token = default) => 
             await Task.Run(() => Entities.AsQueryable(), token);
 
@@ -36,14 +40,6 @@ namespace PickPoint.Lib.Repositories.Implementation;
                 throw new ArgumentNullException(nameof(entity));
 
             await Entities.FindOneAndReplaceAsync(item => item.Id == entity.Id, entity, cancellationToken: token);
-        }
-
-        public virtual async Task UpsertAsync(T entity, CancellationToken token = default)
-        {
-            if (entity is null)
-                throw new ArgumentNullException(nameof(entity));
-
-            await Entities.FindOneAndReplaceAsync<T>(item => item.Id == entity.Id, entity, new FindOneAndReplaceOptions<T> { IsUpsert = true }, token);
         }
 
         public virtual async Task<bool> DeleteAsync(string id, CancellationToken token = default)

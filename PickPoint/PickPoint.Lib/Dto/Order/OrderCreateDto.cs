@@ -10,7 +10,7 @@ public class OrderCreateDto
     [DataMember, Required]
     public int? Number { get; set; }
         
-    [DataMember, Required, OrderItemsMax(ErrorMessage = "Items count is not valid")]
+    [DataMember, Required, OrderItemsMax(ErrorMessage = "Invalid items count")]
     public string[] Items { get; set; }
 
     [DataMember, Required]

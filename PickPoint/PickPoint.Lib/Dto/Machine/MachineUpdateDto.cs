@@ -9,7 +9,7 @@ public class MachineUpdateDto
     [DataMember, Required]
     public string Id { get; set; }
     
-    [DataMember, Required]
+    [DataMember, Required, RegularExpression(@"([0-9]{4})[-]([0-9]{3})", ErrorMessage = "Invalid machine number")]
     public string Number { get; set; }
     
     [DataMember, Required]

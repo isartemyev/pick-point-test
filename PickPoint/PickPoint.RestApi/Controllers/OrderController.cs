@@ -48,7 +48,7 @@ public class OrderController : BaseController
 
     [HttpDelete]
     [Description("Удалить заказ по id")]
-    public async Task<IActionResult> Delete([FromBody, Required] string id)
+    public async Task<IActionResult> Delete([FromQuery, Required] string id)
     {
         var user   = await GetCurrentUserAsync();
         var result = await _facade.DeleteAsync(id, user);
