@@ -26,4 +26,11 @@ public class PickPointMerchantEntity : PickPointEntity
     {
         PasswordHash = passwordHash;
     }
+    
+    public PickPointMerchantEntity SetRole(EMerchantRole role)
+    {
+        Role = role;
+
+        return this;
+    }
 }

@@ -7,10 +7,10 @@ namespace PickPoint.Lib.Dto.Order;
 public class OrderFilterDto
 {
     [DataMember]
-    public string[] Ids { get; set; }
+    public string[]? Ids { get; set; }
         
     [DataMember]
-    public string Text { get; set; }
+    public string? Text { get; set; }
         
     [DataMember]
     public long? PeriodStart { get; set; }

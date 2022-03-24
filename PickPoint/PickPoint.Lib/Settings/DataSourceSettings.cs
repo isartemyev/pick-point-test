@@ -8,7 +8,7 @@ public class DataSourceSettings
         
     private void Init()
     {
-        ProdConnectionString  = "mongodb://my-user1:passw0rd@62.113.96.183:27017/my-database";
-        DevConnectionString   = "mongodb://my-user1:passw0rd@62.113.96.183:27017/my-database";
+        ProdConnectionString  = "mongodb://pickpoint-user:passw0rd@45.84.226.29:27017/pickpoint-database";
+        DevConnectionString   = "mongodb://pickpoint-user:passw0rd@45.84.226.29:27017/pickpoint-database";
     }
 }

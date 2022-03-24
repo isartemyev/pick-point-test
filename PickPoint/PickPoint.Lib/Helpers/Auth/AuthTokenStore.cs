@@ -60,7 +60,10 @@ public class AuthTokenStore : IAuthTokenStore
 
     private static string GenerateAccessToken(string merchantId, DateTime expiredIn)
     {
-        var claims = new List<Claim> { new(ClaimsIdentity.DefaultIssuer, merchantId) };
+        var claims = new List<Claim>
+        {
+            new("merchantId", merchantId),
+        };
 
         var identity = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
 

@@ -6,9 +6,8 @@ namespace PickPoint.RestApi.BuilderExtensions;
 
 internal static class CustomControllersBuilderExtensions
 {
-    public static IHostBuilder UseCustomControllers(this IHostBuilder builder) => builder.ConfigureServices((context, services) =>
+    public static IHostBuilder UseCustomControllers(this IHostBuilder builder) => builder.ConfigureServices((_, services) =>
     {
         services.AddScoped<HomeController>();
-        //services.AddScoped<CommonController>();
     });
 }
