@@ -70,4 +70,14 @@ public class OrderController : BaseController
 
         return Ok(list);
     }
+    
+    [HttpGet]
+    [Description("Отменить заказ по id")]
+    public async Task<IActionResult> Cancel([FromQuery, Required] string id)
+    {
+        var user   = await GetCurrentUserAsync();
+        await _facade.CancelAsync(id, user);
+
+        return Ok();
+    }
 }

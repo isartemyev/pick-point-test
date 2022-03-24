@@ -104,4 +104,23 @@ public class OrderFacade : IOrderFacade
 
         return _mapper.Map<OrderDto[]>(filtered);
     }
+
+    public async Task CancelAsync(string id, PickPointMerchantEntity requester, CancellationToken token = default)
+    {
+        if (requester.Role is EMerchantRole.None or EMerchantRole.Anonymous)
+        {
+            throw new PickPointAccessDeniedException();
+        }
+
+        var entity = await _repository.ReadAsync(id, token);
+
+        if (entity is null)
+        {
+            throw new PickPointEntityNotFoundException();
+        }
+
+        entity.Cancel();
+
+        await _repository.UpdateAsync(entity, token);
+    }
 }

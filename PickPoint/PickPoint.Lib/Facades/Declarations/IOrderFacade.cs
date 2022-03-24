@@ -14,4 +14,6 @@ public interface IOrderFacade
     Task<bool> DeleteAsync(string id, PickPointMerchantEntity requester, CancellationToken token = default);
 
     Task<OrderDto[]> ListAsync(OrderFilterDto filter, PickPointMerchantEntity requester, CancellationToken token = default);
+    
+    Task CancelAsync(string id, PickPointMerchantEntity requester, CancellationToken token = default);
 }

@@ -10,9 +10,6 @@ public class OrderUpdateDto
     [DataMember, Required]
     public string Id { get; set; }
 
-    [DataMember, Required]
-    public EOrderStatus? Status { get; set; }
-
     [DataMember]
     public int Number { get; set; }
         
@@ -21,9 +18,6 @@ public class OrderUpdateDto
 
     [DataMember]
     public decimal? Amount { get; set; }
-        
-    [DataMember]
-    public string MachineNumber { get; set; }
 
     [DataMember]
     public string RecipientPhone { get; set; }
