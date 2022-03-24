@@ -101,14 +101,9 @@ public class OrderFacade : IOrderFacade
     {
         var all = await _orderRepository.AllAsync(token);
 
-        if (all is null)
-        {
-            return Array.Empty<OrderDto>();
-        }
-
         var filtered = _filter.Apply(all, filter, requester).ToArray();
 
-        if (filtered is null || !filtered.Any())
+        if (!filtered.Any())
         {
             return Array.Empty<OrderDto>();
         }

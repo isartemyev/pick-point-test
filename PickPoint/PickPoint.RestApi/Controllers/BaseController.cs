@@ -27,17 +27,12 @@ public class BaseController : Controller
         return StatusCode(StatusCodes.Status201Created, value);
     }
 
-    protected IActionResult Forbidden(object value = null)
-    {
-        return StatusCode(StatusCodes.Status403Forbidden, value);
-    }
-
     protected IActionResult InternalError(object value = null)
     {
         return StatusCode(StatusCodes.Status500InternalServerError, value);
     }
 
-    protected string GetUserId() => User.Claims.SingleOrDefault(x => x.Type == "merchantId")?.Value;
+    protected string? GetUserId() => User.Claims.SingleOrDefault(x => x.Type == "merchantId")?.Value;
 
     protected async Task<PickPointMerchantEntity> GetCurrentUserAsync()
     {

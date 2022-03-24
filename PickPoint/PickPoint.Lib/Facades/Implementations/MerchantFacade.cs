@@ -96,7 +96,7 @@ public class MerchantFacade : IMerchantFacade
 
         if (entity is null)
         {
-            return true;
+            throw new PickPointEntityNotFoundException();
         }
 
         return await _repository.DeleteAsync(id, token);
@@ -112,14 +112,9 @@ public class MerchantFacade : IMerchantFacade
         
         var all = await _repository.AllAsync(token);
 
-        if (all is null)
-        {
-            return Array.Empty<MerchantDto>();
-        }
+        var filtered = _filter.Apply(all, filter, requester).ToArray();
 
-        var filtered = _filter.Apply(all, filter, requester)?.ToArray();
-
-        if (filtered is null || !filtered.Any())
+        if (!filtered.Any())
         {
             return Array.Empty<MerchantDto>();
         }

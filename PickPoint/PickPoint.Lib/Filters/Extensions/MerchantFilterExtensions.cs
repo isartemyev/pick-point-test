@@ -6,7 +6,7 @@ namespace PickPoint.Lib.Filters.Extensions;
 
 internal static class MerchantFilterExtensions
 {
-    internal static IQueryable<PickPointMerchantEntity> FilterByIds(this IQueryable<PickPointMerchantEntity> data, IEnumerable<string> ids)
+    internal static IQueryable<PickPointMerchantEntity> FilterByIds(this IQueryable<PickPointMerchantEntity> data, IEnumerable<string>? ids)
     {
         return ids is null ? data : data.Where(m => ids.Contains(m.Id));
     }
@@ -30,7 +30,7 @@ internal static class MerchantFilterExtensions
         return role.HasValue ? data.Where(t => t.Role == role.Value) : data;
     }
 
-    internal static IEnumerable<PickPointMerchantEntity> FilterByText(this IEnumerable<PickPointMerchantEntity> data, string text)
+    internal static IEnumerable<PickPointMerchantEntity> FilterByText(this IEnumerable<PickPointMerchantEntity> data, string? text)
     {
         if (string.IsNullOrWhiteSpace(text) || string.IsNullOrEmpty(text))
             return data;

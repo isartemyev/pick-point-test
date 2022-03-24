@@ -5,7 +5,7 @@ namespace PickPoint.Lib.Filters.Extensions;
 
 internal static class MachineFilterExtensions
 {
-    internal static IQueryable<PickPointMachineEntity> FilterByIds(this IQueryable<PickPointMachineEntity> data, IEnumerable<string> ids)
+    internal static IQueryable<PickPointMachineEntity> FilterByIds(this IQueryable<PickPointMachineEntity> data, IEnumerable<string>? ids)
     {
         return ids is null ? data : data.Where(m => ids.Contains(m.Id));
     }
@@ -29,7 +29,7 @@ internal static class MachineFilterExtensions
         return flag.HasValue ? data.Where(t => t.Enabled == flag.Value) : data;
     }
 
-    internal static IEnumerable<PickPointMachineEntity> FilterByText(this IEnumerable<PickPointMachineEntity> data, string text)
+    internal static IEnumerable<PickPointMachineEntity> FilterByText(this IEnumerable<PickPointMachineEntity> data, string? text)
     {
         if (string.IsNullOrWhiteSpace(text) || string.IsNullOrEmpty(text))
             return data;

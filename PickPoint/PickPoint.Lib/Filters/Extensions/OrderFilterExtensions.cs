@@ -6,7 +6,7 @@ namespace PickPoint.Lib.Filters.Extensions;
 
 internal static class OrderFilterExtensions
 {
-    internal static IQueryable<PickPointOrderEntity> FilterByIds(this IQueryable<PickPointOrderEntity> data, IEnumerable<string> ids)
+    internal static IQueryable<PickPointOrderEntity> FilterByIds(this IQueryable<PickPointOrderEntity> data, IEnumerable<string>? ids)
     {
         return ids is null ? data : data.Where(m => ids.Contains(m.Id));
     }
@@ -30,7 +30,7 @@ internal static class OrderFilterExtensions
         return data;
     }
 
-    internal static IEnumerable<PickPointOrderEntity> FilterByText(this IEnumerable<PickPointOrderEntity> data, string text)
+    internal static IEnumerable<PickPointOrderEntity> FilterByText(this IEnumerable<PickPointOrderEntity> data, string? text)
     {
         if (string.IsNullOrWhiteSpace(text) || string.IsNullOrEmpty(text))
             return data;
