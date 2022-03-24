@@ -27,4 +27,20 @@ public class PickPointOrderEntity : PickPointEntity
     
     [DataMember]
     public string RecipientName { get; private set; }
+
+    public PickPointOrderEntity()
+    {
+    }
+
+    public PickPointOrderEntity(int number, EOrderStatus status, string[] items, decimal amount, string machineNumber,
+        string recipientPhone, string recipientName)
+    {
+        Number = number;
+        Status = status;
+        Items = items ?? throw new ArgumentNullException(nameof(items));
+        Amount = amount;
+        MachineNumber = machineNumber ?? throw new ArgumentNullException(nameof(machineNumber));
+        RecipientPhone = recipientPhone ?? throw new ArgumentNullException(nameof(recipientPhone));
+        RecipientName = recipientName ?? throw new ArgumentNullException(nameof(recipientName));
+    }
 }

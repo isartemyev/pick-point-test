@@ -14,4 +14,15 @@ public class PickPointMachineEntity : PickPointEntity
     
     [DataMember]
     public bool Enabled { get; private set; }
+
+    public PickPointMachineEntity()
+    {
+    }
+
+    public PickPointMachineEntity(string number, string address, bool enabled)
+    {
+        Number = number ?? throw new ArgumentNullException(nameof(number));
+        Address = address ?? throw new ArgumentNullException(nameof(address));
+        Enabled = enabled;
+    }
 }

@@ -22,6 +22,18 @@ public class PickPointMerchantEntity : PickPointEntity
     [DataMember]
     public string Email { get; private set; }
 
+    public PickPointMerchantEntity()
+    {
+    }
+
+    public PickPointMerchantEntity(string name, string login, EMerchantRole role, string email)
+    {
+        Name = name ?? throw new ArgumentNullException(nameof(name));
+        Login = login ?? throw new ArgumentNullException(nameof(login));
+        Role = role;
+        Email = email ?? throw new ArgumentNullException(nameof(email));
+    }
+
     public void SetPasswordHash(string passwordHash)
     {
         PasswordHash = passwordHash;
