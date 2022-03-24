@@ -1,17 +1,16 @@
-namespace PickPoint.Lib.Domain.Exceptions
+namespace PickPoint.Lib.Domain.Exceptions;
+
+public class PickPointEntityNotFoundException : Exception
 {
-    public class PickPointEntityNotFoundException : Exception
+    public PickPointEntityNotFoundException()
     {
-        public PickPointEntityNotFoundException()
-        {
-        }
+    }
 
-        public PickPointEntityNotFoundException(string message) : base(message)
-        {
-        }
+    public PickPointEntityNotFoundException(string message) : base(message)
+    {
+    }
 
-        public PickPointEntityNotFoundException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
+    public PickPointEntityNotFoundException(string message, Exception innerException) : base(message, innerException)
+    {
     }
 }

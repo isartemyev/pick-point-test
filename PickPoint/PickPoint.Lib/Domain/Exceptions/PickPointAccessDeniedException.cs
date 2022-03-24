@@ -1,17 +1,16 @@
-namespace PickPoint.Lib.Domain.Exceptions
+namespace PickPoint.Lib.Domain.Exceptions;
+
+public class PickPointAccessDeniedException : Exception
 {
-    public class PickPointAccessDeniedException : Exception
+    public PickPointAccessDeniedException()
     {
-        public PickPointAccessDeniedException()
-        {
-        }
+    }
 
-        public PickPointAccessDeniedException(string message) : base(message)
-        {
-        }
+    public PickPointAccessDeniedException(string message) : base(message)
+    {
+    }
 
-        public PickPointAccessDeniedException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
+    public PickPointAccessDeniedException(string message, Exception innerException) : base(message, innerException)
+    {
     }
 }

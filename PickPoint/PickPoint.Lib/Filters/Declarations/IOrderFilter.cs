@@ -2,10 +2,9 @@
 using PickPoint.Lib.Domain.Core.Order;
 using PickPoint.Lib.Dto.Order;
 
-namespace PickPoint.Lib.Filters.Declarations
+namespace PickPoint.Lib.Filters.Declarations;
+
+public interface IOrderFilter : IDataFilter<IQueryable<PickPointOrderEntity>, OrderFilterDto, PickPointMerchantEntity, IEnumerable<PickPointOrderEntity>>
 {
-    public interface IOrderFilter : IDataFilter<IQueryable<PickPointOrderEntity>, OrderFilterDto, PickPointMerchantEntity, IEnumerable<PickPointOrderEntity>>
-    {
         
-    }
 }
