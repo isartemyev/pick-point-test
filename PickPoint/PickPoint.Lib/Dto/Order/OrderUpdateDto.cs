@@ -20,7 +20,7 @@ namespace PickPoint.Lib.Dto.Order
         public string[] Items { get; set; }
 
         [DataMember]
-        public decimal Amount { get; set; }
+        public decimal? Amount { get; set; }
         
         [DataMember]
         public string MachineNumber { get; set; }

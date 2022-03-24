@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Mapping" />
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="AutoMapper" Version="11.0.0" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
       <PackageReference Include="MongoDB.Bson" Version="2.14.1" />

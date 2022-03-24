@@ -11,11 +11,6 @@ namespace PickPoint.Lib.Dto.Auth
         [DataMember]
         public string AccessToken { get; set; }
 
-        public AuthTokenDto()
-        {
-            
-        }
-
         public AuthTokenDto(string merchantId, string accessToken)
         {
             MerchantId = merchantId ?? throw new ArgumentNullException(nameof(merchantId));
